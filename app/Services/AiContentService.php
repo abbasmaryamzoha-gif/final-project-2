@@ -13,23 +13,25 @@ use Illuminate\Support\Facades\Log;
 class AiContentService
 {
     
-    public function generateDraft(string $title, string $type, string $tone): string
+    public function generateDraft(string $title, string $type, string $tone, $temp): string
     {
+   
     $response = Http::withHeaders([
     'x-goog-api-key' => config('services.gemini.key'),
     'Content-Type'   => 'application/json',
 ])->post(config('services.gemini.url') . '/models/' . config('services.gemini.model') . ':generateContent', [
     'systemInstruction' => [
-        'parts' => [['text' => 'You are a friendly writing assistant.']],
+        'parts' => [['text' => 'Keep responses brief. ']],
     ],
     'contents' => [
         ['parts' => [['text' => $this->buildPrompt($title, $type, $tone)]]],
     ],
     'generationConfig' => [
-        'temperature'     => 0.7,
-        'maxOutputTokens' => 500,
+        'temperature'     => (float)$temp,
+        'maxOutputTokens' => 50,
     ],
 ]);
+ //dd($response->status(), $response->body());
 
 if (! $response->successful()) {
     Log::error('Gemini request failed', [

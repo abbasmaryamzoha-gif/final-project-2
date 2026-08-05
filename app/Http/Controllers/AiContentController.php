@@ -17,6 +17,7 @@ class AiContentController extends Controller
             'title' => 'required|string|min:5|max:255',
             'type'  => 'required|in:blog post,meta description,email subject line',
             'tone'  => 'required|in:professional,casual,humorous',
+            'temp' => 'required|in:0,.5,1,1.5,2',
         ]);
 
         try {
@@ -24,6 +25,7 @@ class AiContentController extends Controller
                 $validated['title'],
                 $validated['type'],
                 $validated['tone'],
+                $validated['temp']
             );
 
             return view('ai_form', [

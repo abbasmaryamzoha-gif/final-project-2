@@ -12,5 +12,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 require __DIR__.'/settings.php';
 
 //TO DO: ADD AUTH
-Route::get('/ai-form', [AiContentController::class, 'showForm'])->name('ai.form');
-Route::post('/ai-generate', [AiContentController::class, 'generate'])->name('ai.generate');
+Route::get('/ai-form', [AiContentController::class, 'showForm'])->name('ai.form')->middleware('auth');
+Route::post('/ai-generate', [AiContentController::class, 'generate'])->name('ai.generate')->middleware('auth');
