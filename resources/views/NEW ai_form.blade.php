@@ -35,14 +35,15 @@
             <option value="humorous" @selected(old('tone') === 'humorous')>Humorous</option>
         </select>
 
-    <label for="temperature" class="block font-medium mt-3">Temperature:</label>
-        <select name="tone" id="tone" class="border w-full p-2 mt-1">
-            <option value="0" @selected(old('temperature') === 0)>Min 0</option>
-            <option value=".5" @selected(old('temperature') === .5)>Low .5</option>
-            <option value="1" @selected(old('temperature') === 1)>Mid 1</option>
-            <option value="1.5" @selected(old('temperature') === 1.5)>High 1.5</option>
-            <option value="2" @selected(old('temperature') === 2)>Max 2</option>
+     <label for="temp" class="block font-medium mt-3">Temp:</label>
+        <select name="temp" id="temp" class="border w-full p-2 mt-1">
+            <option value="0" @selected(old('temp') === '0')>0</option>
+            <option value=".5" @selected(old('temp') === '.5')>.5</option>
+            <option value="1" @selected(old('temp') === '1')>1</option>
+            <option value="1.5" @selected(old('temp') === '1.5')>1.5</option>
+            <option value="2" @selected(old('temp') === '2')>2</option>
         </select>
+
 
 
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 mt-4 rounded">Generate</button>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AiContentService;
+use App\Models\PastPrompts;
 
 class AiContentController extends Controller
 {
@@ -15,18 +16,27 @@ class AiContentController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|min:5|max:255',
-            'type'  => 'required|in:blog post,meta description,email subject line',
+            'type'  => 'required|in:blog post,meta description,email subject line, poem, summary, list',
             'tone'  => 'required|in:professional,casual,humorous',
             'temp' => 'required|in:0,.5,1,1.5,2',
         ]);
+
 
         try {
             $output = $ai->generateDraft(
                 $validated['title'],
                 $validated['type'],
                 $validated['tone'],
-                $validated['temp']
+                $validated['temp'],
             );
+
+            PastPrompts::create([ 
+                'title'=>$validated['title'],
+                'type'=>$validated['type'],
+                'tone'=>$validated['tone'],
+                'temp'=>$validated['temp'],
+                'response'=>$output,
+            ]);
 
             return view('ai_form', [
                 'output' => $output,
@@ -38,4 +48,16 @@ class AiContentController extends Controller
                 ->withErrors(['error' => 'AI request failed: ' . $e->getMessage()]);
         }
     }
+
+
+    public function index()
+{
+    //dd('Controller reached');
+    $prompts = PastPrompts::all();
+    return view('dashboard', ['prompts' => $prompts]);
+}
+
+
+
+
 }

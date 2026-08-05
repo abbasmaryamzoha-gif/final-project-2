@@ -1,3 +1,4 @@
+<x-layouts::app :title="__('AiForm')">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +25,9 @@
             <option value="blog post" @selected(old('type') === 'blog post')>Blog Post</option>
             <option value="meta description" @selected(old('type') === 'meta description')>Meta Description</option>
             <option value="email subject line" @selected(old('type') === 'email subject line')>Email Subject Line</option>
+            <option value="poem" @selected(old('type') === 'poem')>Poem</option>
+            <option value="summary" @selected(old('type') === 'summary')>Summary</option>
+            <option value="list" @selected(old('type') === 'list')>List</option>
         </select>
 
         <label for="tone" class="block font-medium mt-3">Tone:</label>
@@ -32,6 +36,15 @@
             <option value="casual" @selected(old('tone') === 'casual')>Casual</option>
             <option value="humorous" @selected(old('tone') === 'humorous')>Humorous</option>
         </select>
+
+         <label for="temp" class="block font-medium mt-3">Temp:</label>
+        <select name="temp" id="temp" class="border w-full p-2 mt-1">
+            <option value="0" @selected(old('temp') === '0')>0</option>
+            <option value=".5" @selected(old('temp') === '.5')>.5</option>
+            <option value="1" @selected(old('temp') === '1')>1</option>
+            <option value="1.5" @selected(old('temp') === '1.5')>1.5</option>
+            <option value="2" @selected(old('temp') === '2')>2</option>
+             </select>
 
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 mt-4 rounded">Generate</button>
     </form>

@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+      Schema::create('prompts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('type');
+            $table->string('tone');
+            $table->string('temp');
+            $table->string('prompt');
+            $table->timestamps();
+        });
     }
 
     /**
